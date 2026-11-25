@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Крок 1: Реєстрація учня — Електронні таблиці (6 клас)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <span class="badge">Інформатика • 6 клас</span>
+                <div class="timer-panel">⏱ Час на сторінці: <span id="page-timer">00:00</span></div>
+            </div>
+            <h1>Тема: «Поняття електронної таблиці»</h1>
+        </div>
+    </header>
+
+    <div class="stepper-bar">
+        <div class="container steps">
+            <a href="index.html" class="step active">1. ПІБ учня</a>
+            <a href="theory.html" class="step">2. Теорія</a>
+            <a href="practice.html" class="step">3. Симулятор + Практика</a>
+            <a href="test.html" class="step">4. Тест (10 питань)</a>
+            <a href="report.html" class="step">5. Звіт та оцінка</a>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="card">
+            <h2>Крок 1. Знайомство та правила оцінювання</h2>
+            <p>Вітаємо на інтерактивному уроці інформатики! Перед початком роботи введи своє прізвище, ім’я та клас — ці дані автоматично потраплять у твій фінальний звіт.</p>
+
+            <div class="info-box" style="margin: 18px 0;">
+                <h3>📊 Як оцінюється робота (максимум 22 бали = 11 балів у журнал):</h3>
+                <ul>
+                    <li><strong>Інтерактивний симулятор (Сторінка 3):</strong> до <strong>6 балів</strong> (3 завдання).</li>
+                    <li><strong>Практичні вправи (Сторінка 3):</strong> до <strong>6 балів</strong> (3 завдання).</li>
+                    <li><strong>Підсумковий тест (Сторінка 4):</strong> до <strong>10 балів</strong> (10 запитань).</li>
+                    <li><strong>Таймер:</strong> система фіксує час, витрачений на теорію, симулятор, практику та тест окремо.</li>
+                </ul>
+            </div>
+
+            <form id="student-form">
+                <div class="form-group">
+                    <label for="student-name">Прізвище та ім’я учня (ПІБ): *</label>
+                    <input type="text" id="student-name" class="input-field" placeholder="Наприклад: Коваленко Олександр" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="student-class">Клас: *</label>
+                    <input type="text" id="student-class" class="input-field" placeholder="Наприклад: 6-А" value="6-А" required>
+                </div>
+
+                <div class="nav-buttons">
+                    <button type="button" id="reset-progress-btn" class="btn btn-secondary">Скинути попередній прогрес</button>
+                    <button type="submit" class="btn">Почати урок → Перейти до теорії</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">Навчальний комплекс з інформатики • 6 клас</div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initPageTimer('page1', 'page-timer');
+            const state = loadState();
+            const nameInput = document.getElementById('student-name');
+            const classInput = document.getElementById('student-class');
+
+            if (state.studentName) nameInput.value = state.studentName;
+            if (state.studentClass) classInput.value = state.studentClass;
+
+            document.getElementById('student-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = nameInput.value.trim();
+                const cls = classInput.value.trim();
+                if (!name) {
+                    alert('Будь ласка, введи своє прізвище та ім’я!');
+                    return;
+                }
+                commitCurrentPageTime();
+                const updated = loadState();
+                updated.studentName = name;
+                updated.studentClass = cls || '6 клас';
+                saveState(updated);
+                window.location.href = 'theory.html';
+            });
+
+            document.getElementById('reset-progress-btn').addEventListener('click', () => {
+                if (confirm('Ти впевнений, що хочеш очистити всі бали, відповіді та таймери?')) {
+                    resetState();
+                    nameInput.value = '';
+                    classInput.value = '6-А';
+                    pageEnterTimestamp = Date.now();
+                    alert('Прогрес очищено!');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
