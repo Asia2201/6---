@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Крок 3: Симулятор та Практика — Електронні таблиці (6 клас)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <span class="badge" id="header-student-info">Інформатика • 6 клас</span>
+                <div class="timer-panel">
+                    ⏱ Симулятор: <span id="sim-timer">00:00</span> | Практика: <span id="prac-timer">00:00</span>
+                </div>
+            </div>
+            <h1>Крок 3. Симулятор та практичні завдання (до 12 балів)</h1>
+        </div>
+    </header>
+
+    <div class="stepper-bar">
+        <div class="container steps">
+            <a href="index.html" class="step done">1. ПІБ учня</a>
+            <a href="theory.html" class="step done">2. Теорія</a>
+            <a href="practice.html" class="step active">3. Симулятор + Практика</a>
+            <a href="test.html" class="step">4. Тест (10 питань)</a>
+            <a href="report.html" class="step">5. Звіт та оцінка</a>
+        </div>
+    </div>
+
+    <main class="container">
+        <!-- ЧАСТИНА 1: СИМУЛЯТОР (6 балів) -->
+        <div class="card">
+            <h2>Частина А. Інтерактивний симулятор (максимум 6 балів)</h2>
+            <p>Виконай 3 дії безпосередньо в електронній таблиці нижче. Кожне виконане завдання приносить <strong>2 бали</strong>!</p>
+
+            <ul class="task-list">
+                <li class="task-item">
+                    <span><strong>Завдання 1 (2 бали):</strong> Знайди та клацни мишкою на клітинку з адресою <code>C3</code>.</span>
+                    <span id="sim-status-1" class="task-status status-pending">Не виконано</span>
+                </li>
+                <li class="task-item">
+                    <span><strong>Завдання 2 (2 бали):</strong> Зміни оцінку з інформатики для <em>Коваленко Олени</em> у клітинці <code>C2</code> на <code>12</code>.</span>
+                    <span id="sim-status-2" class="task-status status-pending">Не виконано</span>
+                </li>
+                <li class="task-item">
+                    <span><strong>Завдання 3 (2 бали):</strong> Виділи клітинку <code>D4</code>, щоб переглянути у рядку формул (<code>fx</code>), як обчислюється середній бал.</span>
+                    <span id="sim-status-3" class="task-status status-pending">Не виконано</span>
+                </li>
+            </ul>
+
+            <div class="formula-bar">
+                <div class="address-box" id="active-address">A1</div>
+                <div class="fx-label">fx</div>
+                <input type="text" id="formula-input" readonly value="Учень">
+            </div>
+
+            <div class="table-wrapper">
+                <table class="sheet" id="demo-spreadsheet">
+                    <thead>
+                        <tr>
+                            <th style="width: 45px;"></th>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>C</th>
+                            <th>D</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>1</th>
+                            <td data-addr="A1" class="selected-cell header-cell">Учень</td>
+                            <td data-addr="B1" class="header-cell">Математика</td>
+                            <td data-addr="C1" class="header-cell">Інформатика</td>
+                            <td data-addr="D1" class="header-cell">Середній бал</td>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td data-addr="A2">Коваленко Олена</td>
+                            <td data-addr="B2" contenteditable="true" class="num-cell">10</td>
+                            <td data-addr="C2" contenteditable="true" class="num-cell">9</td>
+                            <td data-addr="D2" class="formula-cell" data-formula="=AVERAGE(B2:C2)">9.5</td>
+                        </tr>
+                        <tr>
+                            <th>3</th>
+                            <td data-addr="A3">Бондаренко Максим</td>
+                            <td data-addr="B3" contenteditable="true" class="num-cell">9</td>
+                            <td data-addr="C3" contenteditable="true" class="num-cell">11</td>
+                            <td data-addr="D3" class="formula-cell" data-formula="=AVERAGE(B3:C3)">10</td>
+                        </tr>
+                        <tr>
+                            <th>4</th>
+                            <td data-addr="A4">Шевченко Софія</td>
+                            <td data-addr="B4" contenteditable="true" class="num-cell">11</td>
+                            <td data-addr="C4" contenteditable="true" class="num-cell">11</td>
+                            <td data-addr="D4" class="formula-cell" data-formula="=AVERAGE(B4:C4)">11</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top: 12px; font-weight: 600; color: var(--primary-dark);">
+                Бали за симулятор: <span id="sim-score-display">0</span> з 6
+            </p>
+        </div>
+
+        <!-- ЧАСТИНА 2: ПРАКТИЧНЕ ЗАВДАННЯ (6 балів) -->
+        <div class="card">
+            <h2>Частина Б. Практичне завдання на закріплення (максимум 6 балів)</h2>
+            <p>Розглянь наведену вище таблицю та дай правильні відповіді на 3 практичні задачі (по <strong>2 бали</strong> за кожну):</p>
+
+            <div class="practice-grid">
+                <div class="practice-box">
+                    <label for="prac-1"><strong>Задача 1 (2 бали):</strong> Яка адреса клітинки, у якій записано прізвище «Шевченко Софія»?</label>
+                    <input type="text" id="prac-1" placeholder="Наприклад: B2">
+                </div>
+
+                <div class="practice-box">
+                    <label for="prac-2"><strong>Задача 2 (2 бали):</strong> Скільки всього клітинок входить у діапазон <code>B2:C4</code>?</label>
+                    <input type="number" id="prac-2" placeholder="Введи число">
+                </div>
+
+                <div class="practice-box">
+                    <label for="prac-3"><strong>Задача 3 (2 бали):</strong> Яку формулу треба записати у клітинку <code>E2</code>, щоб знайти суму оцінок Олени (<code>B2</code> та <code>C2</code>)?</label>
+                    <input type="text" id="prac-3" placeholder="Наприклад: =A1+B1">
+                </div>
+            </div>
+
+            <div style="margin-top: 18px;">
+                <button type="button" id="check-practice-btn" class="btn btn-accent">Перевірити практичне завдання</button>
+            </div>
+            <div id="practice-feedback" class="alert hidden"></div>
+
+            <div class="nav-buttons">
+                <a href="theory.html" class="btn btn-secondary">← Назад до теорії</a>
+                <a href="test.html" class="btn">Далі: Підсумковий тест (10 питань) →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">Навчальний комплекс з інформатики • 6 клас</div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const state = loadState();
+            const userBadge = document.getElementById('header-student-info');
+            if (userBadge && state.studentName) {
+                userBadge.textContent = `Учень: ${state.studentName} (${state.studentClass})`;
+            }
+
+            // Окремий таймер для симулятора та практики на сторінці 3
+            let activeSubTask = 'page3_sim'; // спочатку йде час симулятора, після виконання 3 завдань - практики
+            let lastTick = Date.now();
+
+            const simTimerEl = document.getElementById('sim-timer');
+            const pracTimerEl = document.getElementById('prac-timer');
+
+            function updateSubTimers() {
+                const now = Date.now();
+                const delta = (now - lastTick) / 1000;
+                lastTick = now;
+
+                const s = loadState();
+                // Перевіряємо, чи виконані всі 3 завдання симулятора
+                if (s.simTasks.t1 && s.simTasks.t2 && s.simTasks.t3) {
+                    activeSubTask = 'page3_prac';
+                }
+                s.times[activeSubTask] = (s.times[activeSubTask] || 0) + delta;
+                saveState(s);
+
+                simTimerEl.textContent = formatSeconds(s.times.page3_sim || 0);
+                pracTimerEl.textContent = formatSeconds(s.times.page3_prac || 0);
+            }
+
+            setInterval(updateSubTimers, 1000);
+
+            // Оновлення UI симулятора зі збереженого стану
+            function refreshSimUI() {
+                const s = loadState();
+                let simPoints = 0;
+                if (s.simTasks.t1) {
+                    document.getElementById('sim-status-1').textContent = 'Виконано (+2 б.)';
+                    document.getElementById('sim-status-1').className = 'task-status status-done';
+                    simPoints += 2;
+                }
+                if (s.simTasks.t2) {
+                    document.getElementById('sim-status-2').textContent = 'Виконано (+2 б.)';
+                    document.getElementById('sim-status-2').className = 'task-status status-done';
+                    simPoints += 2;
+                }
+                if (s.simTasks.t3) {
+                    document.getElementById('sim-status-3').textContent = 'Виконано (+2 б.)';
+                    document.getElementById('sim-status-3').className = 'task-status status-done';
+                    simPoints += 2;
+                }
+                s.scores.simulator = simPoints;
+                saveState(s);
+                document.getElementById('sim-score-display').textContent = simPoints;
+            }
+
+            refreshSimUI();
+
+            // Логіка симулятора
+            const cells = document.querySelectorAll('#demo-spreadsheet td');
+            const addressBox = document.getElementById('active-address');
+            const formulaInput = document.getElementById('formula-input');
+
+            cells.forEach(cell => {
+                cell.addEventListener('click', () => {
+                    cells.forEach(c => c.classList.remove('selected-cell'));
+                    cell.classList.add('selected-cell');
+
+                    const addr = cell.getAttribute('data-addr');
+                    addressBox.textContent = addr;
+
+                    if (cell.hasAttribute('data-formula')) {
+                        formulaInput.value = cell.getAttribute('data-formula');
+                    } else {
+                        formulaInput.value = cell.textContent.trim();
+                    }
+
+                    const s = loadState();
+                    if (addr === 'C3' && !s.simTasks.t1) {
+                        s.simTasks.t1 = true;
+                        saveState(s);
+                        refreshSimUI();
+                    }
+                    if (addr === 'D4' && !s.simTasks.t3) {
+                        s.simTasks.t3 = true;
+                        saveState(s);
+                        refreshSimUI();
+                    }
+                });
+
+                if (cell.classList.contains('num-cell')) {
+                    cell.addEventListener('input', () => {
+                        const val = cell.textContent.trim();
+                        formulaInput.value = val;
+                        recalculateAverages();
+
+                        const addr = cell.getAttribute('data-addr');
+                        const s = loadState();
+                        if (addr === 'C2' && val === '12' && !s.simTasks.t2) {
+                            s.simTasks.t2 = true;
+                            saveState(s);
+                            refreshSimUI();
+                        }
+                    });
+                }
+            });
+
+            function recalculateAverages() {
+                for (let row = 2; row <= 4; row++) {
+                    const bCell = document.querySelector(`td[data-addr="B${row}"]`);
+                    const cCell = document.querySelector(`td[data-addr="C${row}"]`);
+                    const dCell = document.querySelector(`td[data-addr="D${row}"]`);
+
+                    const valB = parseFloat(bCell.textContent.replace(',', '.'));
+                    const valC = parseFloat(cCell.textContent.replace(',', '.'));
+
+                    if (!isNaN(valB) && !isNaN(valC)) {
+                        const avg = ((valB + valC) / 2).toFixed(1).replace(/\.0$/, '');
+                        dCell.textContent = avg;
+                    } else {
+                        dCell.textContent = 'Помилка!';
+                    }
+                }
+            }
+
+            // Перевірка практичного завдання (6 балів)
+            const checkPracBtn = document.getElementById('check-practice-btn');
+            const pracFeedback = document.getElementById('practice-feedback');
+
+            checkPracBtn.addEventListener('click', () => {
+                // Перемикаємо таймер на практику, якщо ще не перемкнувся
+                activeSubTask = 'page3_prac';
+
+                const ans1 = document.getElementById('prac-1').value.trim().toUpperCase();
+                const ans2 = document.getElementById('prac-2').value.trim();
+                const ans3 = document.getElementById('prac-3').value.replace(/\s+/g, '').toUpperCase();
+
+                let pracScore = 0;
+                let details = [];
+
+                // Задача 1: A4
+                if (ans1 === 'A4' || ans1 === 'А4') { // враховуємо укр і лат А
+                    pracScore += 2;
+                    details.push('Задача 1: правильно (+2 б.)');
+                } else {
+                    details.push('Задача 1: помилка (правильно: A4)');
+                }
+
+                // Задача 2: B2:C4 -> 2 стовпці * 3 рядки = 6 клітинок
+                if (ans2 === '6') {
+                    pracScore += 2;
+                    details.push('Задача 2: правильно (+2 б.)');
+                } else {
+                    details.push('Задача 2: помилка (правильно: 6 клітинок)');
+                }
+
+                // Задача 3: =B2+C2 або =C2+B2 або =SUM(B2:C2)
+                const validFormulas = ['=B2+C2', '=C2+B2', '=SUM(B2:C2)', '=SUM(B2;C2)', '=СУММ(B2:C2)', '=СУММ(B2;C2)'];
+                if (validFormulas.includes(ans3)) {
+                    pracScore += 2;
+                    details.push('Задача 3: правильно (+2 б.)');
+                } else {
+                    details.push('Задача 3: помилка (приклад правильної формули: =B2+C2)');
+                }
+
+                const s = loadState();
+                s.scores.practice = pracScore;
+                s.practiceCompleted = true;
+                saveState(s);
+
+                pracFeedback.classList.remove('hidden', 'alert-success', 'alert-warning');
+                pracFeedback.classList.add(pracScore === 6 ? 'alert-success' : 'alert-warning');
+                pracFeedback.innerHTML = `Результат за практичне завдання: <strong>${pracScore} з 6 балів</strong>.<br>${details.join(' • ')}`;
+            });
+        });
+    </script>
+</body>
+</html>
